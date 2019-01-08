@@ -27,10 +27,11 @@ function getJokes(e) {
           output += `<li>${valueIteration.joke}</li>`;
         });
       } else {
+        // If something goes wrong, display only an error
         output += '<li>Something went wrong.</li>';
       }
 
-      
+      // Set all the jokes inside of output to the div we created with the class of jokes
       document.querySelector('.jokes').innerHTML = output;
     }
   }
@@ -38,5 +39,6 @@ function getJokes(e) {
   // Send off the data
   xhr.send();
 
+  // Prevent the default functionality of buttons
   e.preventDefault();
 }

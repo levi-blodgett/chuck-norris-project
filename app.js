@@ -13,12 +13,13 @@ function getJokes(e) {
 
   //
   xhr.onload = function() {
+    let output = '';
     // If it is a success
-    if (this.status === 200) {
+    if (this.status === 200 && number > 0) {
+      console.log(true);
+      
       // Then get the response from the API and have it be JSON parsed to be an actual object we can manipulate
       const response = JSON.parse(this.responseText);
-
-      let output = '';
 
       if (response.type === 'success') {
         // Don't loop through the response, you have to loop through the VALUE, log it if you are confused here
@@ -28,12 +29,14 @@ function getJokes(e) {
         });
       } else {
         // If something goes wrong, display only an error
-        output += '<li>Something went wrong.</li>';
+        output += '<li class="red">Something went wrong.</li>';
       }
-
-      // Set all the jokes inside of output to the div we created with the class of jokes
-      document.querySelector('.jokes').innerHTML = output;
+    } else {
+      // If something goes wrong, display only an error
+      output += '<p class="red">Something went wrong, please try again later or with valid inputs.</p>';
     }
+    // Set all the jokes inside of output to the div we created with the class of jokes
+    document.querySelector('.jokes').innerHTML = output;
   }
 
   // Send off the data
